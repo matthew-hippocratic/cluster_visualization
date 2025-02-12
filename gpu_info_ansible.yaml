@@ -1,0 +1,83 @@
+- name: Retrieve GPU utilization and container info
+  hosts: all
+  gather_facts: false
+  vars:
+    basedir: "."  # default base directory; can be overridden using --extra-vars
+
+  tasks:
+    - name: Remove old CSV file for this host
+      file:
+        path: "{{ basedir }}/gpu_usage_{{ inventory_hostname }}.csv"
+        state: absent
+
+    - name: Retrieve running Docker containers
+      shell: |
+        docker ps --format '{% raw %}{{.Names}}{% endraw %}'
+      register: docker_containers
+
+    - name: Retrieve GPU information for each container
+      shell: |
+        docker inspect {{ item }} | jq -r '.[0].HostConfig.DeviceRequests[0].DeviceIDs // [] | select(length > 0) | map(tostring) | join(" ") | "[" + . + "]"'
+      with_items: "{{ docker_containers.stdout_lines }}"
+      register: gpu_info
+      when: docker_containers.stdout_lines | length > 0
+
+    - name: Create array of valid GPU entries
+      set_fact:
+        valid_gpu_entries: >-
+          {{ gpu_info.results | 
+             selectattr('stdout', 'defined') | 
+             selectattr('stdout', 'string') | 
+             selectattr('stdout', '!=', '') | 
+             map('combine', {'host': inventory_hostname}) | 
+             list }}
+
+    - name: Debug GPU entries gathered on this host
+      debug:
+        var: valid_gpu_entries
+
+    - name: Write GPU information to local file with hostname appended
+      lineinfile:
+        path: "{{ basedir }}/gpu_usage_{{ inventory_hostname }}.csv"
+        line: "{{ item.host }},{{ item.item }},{{ item.stdout }}"
+        create: yes
+      with_items: "{{ valid_gpu_entries }}"
+      when: valid_gpu_entries | length > 0
+
+- name: Combine all worker node GPU CSV data into a single file on the master node
+  hosts: localhost
+  gather_facts: false
+  vars:
+    basedir: "."  # default base directory; can be overridden using --extra-vars
+
+  tasks:
+    - name: Remove old combined CSV file if it exists
+      file:
+        path: "{{ basedir }}/gpu_usage_combined.csv"
+        state: absent
+
+    - name: Add header to combined CSV (if not already present)
+      lineinfile:
+        path: "{{ basedir }}/gpu_usage_combined.csv"
+        line: "node,model,GPUs"
+        create: yes
+        insertbefore: BOF
+
+    - name: List CSV files to be concatenated
+      shell: >
+        find {{ basedir }} -maxdepth 1 -type f -name "gpu_usage_*.csv" ! -name "gpu_usage_combined.csv"
+      args:
+        executable: /bin/bash
+      register: matching_csv_files
+
+    - name: Debug matching CSV files
+      debug:
+        var: matching_csv_files.stdout_lines
+
+    - name: Concatenate GPU data from each node CSV into combined CSV
+      shell: >
+        for file in $(find {{ basedir }} -maxdepth 1 -type f -name "gpu_usage_*.csv" ! -name "gpu_usage_combined.csv"); do
+          cat "$file" >> {{ basedir }}/gpu_usage_combined.csv;
+        done
+      args:
+        executable: /bin/bash

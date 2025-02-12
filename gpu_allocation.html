@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GPU Allocation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .node {
+            margin-bottom: 30px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .gpu-container {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .gpu {
+            width: 100px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        .gpu.free {
+            background-color: #22c55e;
+            color: black;
+        }
+        .gpu.occupied {
+            background-color: #dc2626;
+        }
+        .model-name {
+            font-size: 12px;
+            word-break: break-word;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPU Allocation</h1>
+
+    <div class="node">
+        <h2>ip-10-40-81-180</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">emotivox_server</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">emotiv1</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 2</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 3</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">emotivox_subtextalign</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 5</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 6</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">bgev001</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-81-199</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 5</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 6</div>
+                <div class="model-name">i79</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">i79</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-82-115</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">ssys8v1</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">ssys8v2</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">ssys8v3</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">ssys8v4</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 4</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 5</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 6</div>
+            </div>
+
+            <div class="gpu free">
+                <div>GPU 7</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-83-235</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 5</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 6</div>
+                <div class="model-name">s16</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">s16</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-86-233</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 5</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 6</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">i80lr2e4</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-90-126</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 5</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 6</div>
+                <div class="model-name">s13</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">s13</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="node">
+        <h2>ip-10-40-92-76</h2>
+        <div class="gpu-container">
+
+            <div class="gpu occupied">
+                <div>GPU 0</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 1</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 2</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 3</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 4</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 5</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 6</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+
+            <div class="gpu occupied">
+                <div>GPU 7</div>
+                <div class="model-name">i80lr5e4</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
