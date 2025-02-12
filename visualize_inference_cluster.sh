@@ -1,6 +1,6 @@
 # First create the inventory file from running the python script
 source ~/venv/bin/activate
-python /fsx/ubuntu/matt/cluster_visualization/create_inventory_file.py --partition ml.inference
+python /fsx/ubuntu/matt/cluster_visualization/create_inventory_file.py --partition inference
 
 # Then run the ansible playbook with the inventory file,
 # passing in a base directory for CSV files (update the basedir as needed)
