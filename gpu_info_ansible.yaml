@@ -1,3 +1,16 @@
+- name: Clean up old GPU usage files
+  hosts: localhost
+  gather_facts: false
+  vars:
+    basedir: "."  # default base directory; can be overridden using --extra-vars
+
+  tasks:
+    - name: Remove all existing GPU usage CSV files
+      shell: >
+        rm -f {{ basedir }}/gpu_usage_*.csv
+      args:
+        executable: /bin/bash
+
 - name: Retrieve GPU utilization and container info
   hosts: all
   gather_facts: false
@@ -51,11 +64,6 @@
     basedir: "."  # default base directory; can be overridden using --extra-vars
 
   tasks:
-    - name: Remove old combined CSV file if it exists
-      file:
-        path: "{{ basedir }}/gpu_usage_combined.csv"
-        state: absent
-
     - name: Add header to combined CSV (if not already present)
       lineinfile:
         path: "{{ basedir }}/gpu_usage_combined.csv"
